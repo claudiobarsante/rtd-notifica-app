@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Credentials } from '../../store/auth/types';
+import { AuthState, Credentials } from '../../store/auth/types';
 import { Container } from './styles';
 import { signInRequest } from './../../store/auth/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,10 +12,14 @@ const SignIn = () => {
 		signInRequest({ email, password });
 	};
 	const dispatch = useDispatch();
+	const auth = useSelector<AuthState>(state => state.loadingIndicator);
+	const userId = useSelector<AuthState>(state => state.userId);
+
+	console.log('user-->', auth, userId);
 
 	useEffect(() => {
 		console.log('passei no useEffect');
-		dispatch(signInRequest({ email: 'clbmribas@gmail.com', password: 'Claudio@2021' }));
+		dispatch(signInRequest({ email: 'user@demo.com.br', password: 'Demo@2020' }));
 		console.log('depois passei no useEffect');
 	}, [dispatch]);
 	return (
