@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { AuthState } from './types';
+import { ActionTypes, AuthState } from './types';
 
 const INITIAL_STATE: AuthState = {
 	oficioId: 0,
@@ -13,11 +13,22 @@ const INITIAL_STATE: AuthState = {
 		isLoading: false,
 		activityText: '',
 	},
-	expirationDate: '',
+	expirationDate: undefined,
 };
 
 const auth: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case ActionTypes.signInSuccess:
+			return {
+				...state,
+				oficioId: action.payload.oficioId,
+				institucionalId: action.payload.institucionalId,
+				userId: action.payload.userId,
+				token: action.payload.token,
+				apelido: action.payload.apelido,
+				userName: action.payload.userName,
+				expirationDate: action.payload.expirationDate,
+			};
 		default:
 			return state;
 	}

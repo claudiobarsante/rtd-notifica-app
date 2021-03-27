@@ -18,7 +18,7 @@ export type AuthState = {
 	apelido: string;
 	error: AuthError;
 	loadingIndicator: LoadingIndicatorState;
-	expirationDate: string;
+	expirationDate?: Date;
 };
 
 //Credentials
