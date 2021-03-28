@@ -4,7 +4,7 @@ export type AuthError = {
 	message: string;
 };
 
-export type LoadingIndicatorState = {
+export type LoadingIndicator = {
 	isLoading: boolean;
 	activityText: string;
 };
@@ -17,8 +17,9 @@ export type AuthState = {
 	token: string;
 	apelido: string;
 	error: AuthError;
-	loadingIndicator: LoadingIndicatorState;
+	loadingIndicator: LoadingIndicator;
 	expirationDate?: Date;
+	isAuthenticated: boolean;
 };
 
 //Credentials
@@ -28,7 +29,8 @@ export type Credentials = {
 };
 
 //Redux-Saga ActionTypes
-export enum ActionTypes {
+export enum ActionType {
+	setLoadingIndicator = 'SET_LOADING_INDICATOR',
 	signInRequest = 'SIGNIN_REQUEST',
 	signInSuccess = 'SIGNIN_SUCCESS',
 	signInFailure = 'SIGNIN_FAILURE',

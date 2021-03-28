@@ -1,31 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import { AuthState, Credentials } from '../../store/auth/types';
+import { AuthState, Credentials, LoadingIndicator } from '../../store/auth/types';
 import { Container } from './styles';
 import { signInRequest } from './../../store/auth/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { State } from '../../store/storeConfig';
+import { useHistory } from 'react-router';
+
 const SignIn = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const handleSubmit = ({ email, password }: Credentials) => {
-		console.log('handle ', email, password);
-		signInRequest({ email, password });
-	};
 	const dispatch = useDispatch();
-	const auth = useSelector<AuthState>(state => state.loadingIndicator);
-	const userId = useSelector<AuthState>(state => state.userId);
+	const { isLoading, activityText } = useSelector<State, LoadingIndicator>(
+		state => state.auth.loadingIndicator
+	);
+	const isAuthenticated = useSelector<State, boolean>(state => state.auth.isAuthenticated);
 
-	console.log('user-->', auth, userId);
+	//const userId = useSelector<AuthState>(state => state.userId);
+
+	const handleSubmit = () => {
+		console.log('passe ');
+		dispatch(signInRequest({ email: 'user@demo.com.br', password: 'Demo@2020' }));
+
+		//console.log('user-->', auth);
+	};
+	const history = useHistory();
+
+	if (isAuthenticated) history.push('/overview');
 
 	useEffect(() => {
 		console.log('passei no useEffect');
 		dispatch(signInRequest({ email: 'user@demo.com.br', password: 'Demo@2020' }));
-		console.log('depois passei no useEffect');
+		console.log('depois passei no useEffect->');
 	}, [dispatch]);
+
 	return (
 		<Container>
 			<h1>signin</h1>
-			<form onSubmit={() => handleSubmit({ email, password })}>
+			<p>{`isLoading === ${isLoading} e activitytext=>${activityText}`}</p>
+			<form onSubmit={() => handleSubmit()}>
 				<input
 					type='text'
 					placeholder='email'
