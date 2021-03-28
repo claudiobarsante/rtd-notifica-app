@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
-import { ActionType, AuthState } from './types';
-
+import { AuthState } from './types';
+import { ActionType } from './actions';
 const INITIAL_STATE: AuthState = {
 	oficioId: 0,
 	institucionalId: 0,
@@ -19,7 +19,7 @@ const INITIAL_STATE: AuthState = {
 
 const auth: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case ActionType.setLoadingIndicator:
+		case ActionType.SET_LOADING_INDICATOR:
 			return {
 				...state,
 				loadingIndicator: {
@@ -27,7 +27,7 @@ const auth: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
 					activityText: action.payload.activityText,
 				},
 			};
-		case ActionType.signInSuccess:
+		case ActionType.SIGNIN_SUCCESS:
 			return {
 				...state,
 				oficioId: action.payload.oficioId,

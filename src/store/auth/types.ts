@@ -27,11 +27,3 @@ export type Credentials = {
 	email: string;
 	password: string;
 };
-
-//Redux-Saga ActionTypes
-export enum ActionType {
-	setLoadingIndicator = 'SET_LOADING_INDICATOR',
-	signInRequest = 'SIGNIN_REQUEST',
-	signInSuccess = 'SIGNIN_SUCCESS',
-	signInFailure = 'SIGNIN_FAILURE',
-}
