@@ -5,21 +5,24 @@ export type AuthError = {
 };
 
 export type LoadingIndicator = {
-	isLoading: boolean;
 	activityText: string;
+	isLoading: boolean;
 };
 
-export type AuthState = {
-	oficioId: number;
+export type User = {
+	apelido: string;
 	institucionalId: number;
+	oficioId: number;
 	userId: string;
 	userName: string;
-	token: string;
-	apelido: string;
+};
+export type AuthState = {
+	user: User;
 	error: AuthError;
-	loadingIndicator: LoadingIndicator;
 	expirationDate?: Date;
 	isAuthenticated: boolean;
+	loadingIndicator: LoadingIndicator;
+	token: string;
 };
 
 //Credentials
