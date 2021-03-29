@@ -29,7 +29,7 @@ const SignIn = () => {
 
 	useEffect(() => {
 		console.log('passei no useEffect');
-		dispatch(signInRequest({ email: 'user@demo.com.br', password: 'Demo@2020' }));
+		dispatch(signInRequest({ email: 'ser@demo.com.br', password: 'Demo@2020' }));
 		console.log('depois passei no useEffect->');
 	}, [dispatch]);
 

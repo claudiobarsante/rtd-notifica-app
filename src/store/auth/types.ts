@@ -1,9 +1,6 @@
-//AuthState
-export type AuthError = {
-	code: number;
-	message: string;
-};
+import { ResponseError } from '../../types/response';
 
+//AuthState
 export type LoadingIndicator = {
 	activityText: string;
 	isLoading: boolean;
@@ -18,7 +15,7 @@ export type User = {
 };
 export type AuthState = {
 	currentUser: User;
-	error: AuthError;
+	error: ResponseError;
 	expirationDate?: Date;
 	isAuthenticated: boolean;
 	loadingIndicator: LoadingIndicator;

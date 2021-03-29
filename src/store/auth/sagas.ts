@@ -1,20 +1,20 @@
-import { all, takeLatest, select, call, put } from 'redux-saga/effects';
-import { AuthState } from './types';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
+
 import sigInService from './../../services/authServices';
 import { AxiosResponse } from 'axios';
 import { signInRequest, signInSuccess, signInFailure, setLoadingIndicator } from './actions';
 import { Response } from '../../types/response';
-import { State } from '../configureStore';
+
 import { UserActionTypes } from './actions';
+import ErrorMessage from '../../utils/ErrorMessage';
 
 type signInRequestType = ReturnType<typeof signInRequest>;
 
 function* signIn(action: signInRequestType) {
-	//const qq: number = yield select((state: State) => state.auth.institucionalId);
+	//
 	try {
 		yield put(setLoadingIndicator({ isLoading: true, activityText: 'carregando request' }));
 		const response: AxiosResponse = yield call(sigInService, action.payload);
-		yield put(setLoadingIndicator({ isLoading: false, activityText: 'acabou o request' }));
 
 		if (response.status === Response.OK) {
 			//
@@ -42,13 +42,12 @@ function* signIn(action: signInRequestType) {
 				})
 			);
 		}
-	} catch (error) {}
-
-	// } else {
-	// 	console.log('errouryield put(signInFailure())');
-	// }
+	} catch (error) {
+		const { code, message } = ErrorMessage.returnMessage(error.toString());
+		yield put(signInFailure({ code, message }));
+	}
+	yield put(setLoadingIndicator({ isLoading: false, activityText: 'acabou o request' }));
 }
-
 export default function* authSaga() {
 	yield all([takeLatest(UserActionTypes.SIGNIN_REQUEST, signIn)]);
 }

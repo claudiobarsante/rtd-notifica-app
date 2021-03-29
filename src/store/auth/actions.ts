@@ -1,3 +1,4 @@
+import { ResponseError } from '../../types/response';
 import { AuthState, Credentials, LoadingIndicator } from './types';
 
 export enum UserActionTypes {
@@ -27,9 +28,9 @@ export function signInSuccess(authState: AuthState) {
 	};
 }
 
-export function signInFailure(authState: AuthState) {
+export function signInFailure(error: ResponseError) {
 	return {
 		type: UserActionTypes.SIGNIN_FAILURE,
-		payload: authState,
+		payload: error,
 	};
 }

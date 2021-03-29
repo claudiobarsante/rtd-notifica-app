@@ -40,7 +40,15 @@ const authReducer: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
 				isAuthenticated: payload.isAuthenticated,
 				token: payload.token,
 			};
-
+		case UserActionTypes.SIGNIN_FAILURE:
+			const { code, message } = payload;
+			return {
+				...state,
+				error: { code, message },
+				expirationDate: undefined,
+				isAuthenticated: false,
+				token: '',
+			};
 		default:
 			return state;
 	}
