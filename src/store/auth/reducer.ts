@@ -1,43 +1,44 @@
 import { Reducer } from 'redux';
 import { AuthState } from './types';
-import { ActionType } from './actions';
+import { UserActionTypes } from './actions';
 const INITIAL_STATE: AuthState = {
-	oficioId: 0,
-	institucionalId: 0,
-	userId: '',
-	userName: '',
-	token: '',
-	apelido: '',
+	currentUser: {
+		apelido: '',
+		institucionalId: 0,
+		oficioId: 0,
+		userId: '',
+		userName: '',
+	},
 	error: { code: 0, message: '' },
+	expirationDate: undefined,
+	isAuthenticated: false,
 	loadingIndicator: {
 		isLoading: false,
 		activityText: '',
 	},
-	expirationDate: undefined,
-	isAuthenticated: false,
+	token: '',
 };
 
-const auth: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
-	switch (action.type) {
-		case ActionType.SET_LOADING_INDICATOR:
+const authReducer: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
+	const { payload, type } = action;
+
+	switch (type) {
+		case UserActionTypes.SET_LOADING_INDICATOR:
 			return {
 				...state,
 				loadingIndicator: {
-					isLoading: action.payload.isLoading,
-					activityText: action.payload.activityText,
+					isLoading: payload.isLoading,
+					activityText: payload.activityText,
 				},
 			};
-		case ActionType.SIGNIN_SUCCESS:
+		case UserActionTypes.SIGNIN_SUCCESS:
 			return {
 				...state,
-				oficioId: action.payload.oficioId,
-				institucionalId: action.payload.institucionalId,
-				userId: action.payload.userId,
-				token: action.payload.token,
-				apelido: action.payload.apelido,
-				userName: action.payload.userName,
-				expirationDate: action.payload.expirationDate,
-				isAuthenticated: action.payload.isAuthenticated,
+				currentUser: payload.currentUser,
+				error: payload.error,
+				expirationDate: payload.expirationDate,
+				isAuthenticated: payload.isAuthenticated,
+				token: payload.token,
 			};
 
 		default:
@@ -45,4 +46,4 @@ const auth: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
 	}
 };
 
-export default auth;
+export default authReducer;

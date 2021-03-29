@@ -1,8 +1,18 @@
 import { combineReducers } from 'redux';
-import auth from './auth/reducer';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import authReducer from './auth/reducer';
 import test from './test/reducer';
 
-export default combineReducers({
-	auth,
+const persistConfig = {
+	key: 'root',
+	storage,
+	whitelist: ['auth'],
+};
+
+const rootReducer = combineReducers({
+	auth: authReducer,
 	test,
 });
+
+export default persistReducer(persistConfig, rootReducer);

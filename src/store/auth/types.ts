@@ -17,7 +17,7 @@ export type User = {
 	userName: string;
 };
 export type AuthState = {
-	user: User;
+	currentUser: User;
 	error: AuthError;
 	expirationDate?: Date;
 	isAuthenticated: boolean;

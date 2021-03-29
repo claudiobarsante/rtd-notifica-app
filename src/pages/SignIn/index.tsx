@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { AuthState, Credentials, LoadingIndicator } from '../../store/auth/types';
+import { useState, useEffect } from 'react';
+import { LoadingIndicator } from '../../store/auth/types';
 import { Container } from './styles';
 import { signInRequest } from './../../store/auth/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { State } from '../../store/storeConfig';
+import { State } from '../../store/configureStore';
 import { useHistory } from 'react-router';
 
 const SignIn = () => {
@@ -11,20 +11,19 @@ const SignIn = () => {
 	const [password, setPassword] = useState('');
 
 	const dispatch = useDispatch();
+
 	const { isLoading, activityText } = useSelector<State, LoadingIndicator>(
 		state => state.auth.loadingIndicator
 	);
 	const isAuthenticated = useSelector<State, boolean>(state => state.auth.isAuthenticated);
 
-	//const userId = useSelector<AuthState>(state => state.userId);
-
 	const handleSubmit = () => {
 		console.log('passe ');
 		dispatch(signInRequest({ email: 'user@demo.com.br', password: 'Demo@2020' }));
-
-		//console.log('user-->', auth);
 	};
 	const history = useHistory();
+
+	console.log('isAuth ', isAuthenticated);
 
 	if (isAuthenticated) history.push('/overview');
 
