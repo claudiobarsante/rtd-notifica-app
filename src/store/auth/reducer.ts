@@ -1,6 +1,7 @@
 import { Reducer } from 'redux';
 import { AuthState } from './types';
 import { UserActionTypes } from './actions';
+
 const INITIAL_STATE: AuthState = {
 	currentUser: {
 		apelido: '',

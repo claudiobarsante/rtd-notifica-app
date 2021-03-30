@@ -43,11 +43,12 @@ function* signIn(action: signInRequestType) {
 			);
 		}
 	} catch (error) {
-		const { code, message } = ErrorMessage.returnMessage(error.toString());
+		const { code, message } = ErrorMessage.formatMessage(error.toString());
 		yield put(signInFailure({ code, message }));
 	}
 	yield put(setLoadingIndicator({ isLoading: false, activityText: 'acabou o request' }));
 }
+
 export default function* authSaga() {
 	yield all([takeLatest(UserActionTypes.SIGNIN_REQUEST, signIn)]);
 }

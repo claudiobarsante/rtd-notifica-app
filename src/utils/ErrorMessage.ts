@@ -4,7 +4,7 @@ type ReturnedErrorMessage = {
 };
 
 export default class ErrorMessage {
-	static returnMessage(errorMessage: string): ReturnedErrorMessage {
+	static formatMessage(errorMessage: string): ReturnedErrorMessage {
 		let code = 0;
 		let message = '';
 

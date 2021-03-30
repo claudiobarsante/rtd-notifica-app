@@ -1,56 +1,63 @@
-import { useState, useEffect } from 'react';
-import { LoadingIndicator } from '../../store/auth/types';
-import { Container } from './styles';
-import { signInRequest } from './../../store/auth/actions';
+import { Redirect } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { ErrorMessage } from '@hookform/error-message';
+//Types
+import { Credentials, LoadingIndicator } from '../../store/auth/types';
+import { ResponseError } from '../../types/response';
 import { State } from '../../store/configureStore';
-import { useHistory } from 'react-router';
+//Saga actions
+import { signInRequest } from './../../store/auth/actions';
+//Styles
+import { Container } from './styles';
+
+const SignInSchema = yup.object().shape({
+	email: yup
+		.string()
+		.required('E-mail é um campo obrigatório')
+		.email('Por favor, informe um e-mail válido'),
+	password: yup.string().required('Senha é um campo obrigatório'),
+});
 
 const SignIn = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-
-	const dispatch = useDispatch();
+	const { register, handleSubmit, errors } = useForm<Credentials>({
+		resolver: yupResolver(SignInSchema),
+		mode: 'onBlur',
+	});
 
 	const { isLoading, activityText } = useSelector<State, LoadingIndicator>(
 		state => state.auth.loadingIndicator
 	);
+	const { code, message } = useSelector<State, ResponseError>(state => state.auth.error);
 	const isAuthenticated = useSelector<State, boolean>(state => state.auth.isAuthenticated);
 
-	const handleSubmit = () => {
-		console.log('passe ');
+	const dispatch = useDispatch();
+
+	const submitForm = async ({ email, password }: Credentials) => {
 		dispatch(signInRequest({ email: 'user@demo.com.br', password: 'Demo@2020' }));
 	};
-	const history = useHistory();
 
-	console.log('isAuth ', isAuthenticated);
-
-	if (isAuthenticated) history.push('/overview');
-
-	useEffect(() => {
-		console.log('passei no useEffect');
-		dispatch(signInRequest({ email: 'ser@demo.com.br', password: 'Demo@2020' }));
-		console.log('depois passei no useEffect->');
-	}, [dispatch]);
-
+	if (isAuthenticated) {
+		return <Redirect to='/overview' />;
+	}
 	return (
 		<Container>
 			<h1>signin</h1>
 			<p>{`isLoading === ${isLoading} e activitytext=>${activityText}`}</p>
-			<form onSubmit={() => handleSubmit()}>
+			<form onSubmit={handleSubmit(submitForm)}>
+				<ErrorMessage name='email' errors={errors} render={({ message }) => <p>{message}</p>} />
+				<input id='email' name='email' type='text' placeholder='email' ref={register} />
+				<ErrorMessage name='password' errors={errors} render={({ message }) => <p>{message}</p>} />
 				<input
-					type='text'
-					placeholder='email'
-					value={email}
-					onChange={event => setEmail(event.target.value)}
-				/>
-				<input
+					id='password'
+					name='password'
 					type='password'
 					placeholder='password'
-					value={password}
-					onChange={event => setPassword(event.target.value)}
+					ref={register}
 				/>
-				<button type='submit'>submit</button>
+				<button type='submit'>Submit</button>
 			</form>
 		</Container>
 	);
