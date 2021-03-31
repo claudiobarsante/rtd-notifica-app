@@ -46,6 +46,7 @@ function* signIn(action: signInRequestType) {
 		const { code, message } = ErrorMessage.formatMessage(error.toString());
 		yield put(signInFailure({ code, message }));
 	}
+
 	yield put(setLoadingIndicator({ isLoading: false, activityText: 'acabou o request' }));
 }
 
