@@ -1,12 +1,12 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
-import sigInService from './../../services/authServices';
+import sigInService from '../../services/authService';
 import { AxiosResponse } from 'axios';
 import { signInRequest, signInSuccess, signInFailure, setLoadingIndicator } from './actions';
 import { Response } from '../../types/response';
 
 import { UserActionTypes } from './actions';
-import ErrorMessage from '../../utils/ErrorMessage';
+import { formatMessage } from '../../utils/ErrorMessage';
 
 type signInRequestType = ReturnType<typeof signInRequest>;
 
@@ -43,7 +43,7 @@ function* signIn(action: signInRequestType) {
 			);
 		}
 	} catch (error) {
-		const { code, message } = ErrorMessage.formatMessage(error.toString());
+		const { code, message } = formatMessage(error.toString());
 		yield put(signInFailure({ code, message }));
 	}
 
