@@ -11,7 +11,7 @@ apiClient.interceptors.request.use((config: AxiosRequestConfig) => {
 	if (isAuthenticated) {
 		config.headers.Authorization = `Bearer ${token}`;
 	}
-
+	console.log('token ', token, isAuthenticated);
 	return config;
 });
 
