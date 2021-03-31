@@ -6,7 +6,7 @@ import { signInRequest, signInSuccess, signInFailure, setLoadingIndicator } from
 import { Response } from '../../types/response';
 
 import { UserActionTypes } from './actions';
-import { formatMessage } from '../../utils/ErrorMessage';
+import { formatMessage } from '../../utils/errorMessage';
 
 type signInRequestType = ReturnType<typeof signInRequest>;
 
