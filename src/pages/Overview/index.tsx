@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { State } from '../../store/configureStore';
-
 import { Container } from './styles';
 import getAllNotificacoesService from './../../services/notificacaoService';
 
@@ -11,7 +10,8 @@ const Overview = () => {
 	useEffect(() => {
 		async function getAll(oficioId: number) {
 			const response = await getAllNotificacoesService(oficioId);
-			console.log('reponse ', response);
+
+			console.log('reponse ', response.data);
 		}
 
 		getAll(oficioId);
