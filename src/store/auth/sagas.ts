@@ -53,11 +53,11 @@ function* signIn(action: signInRequestType) {
 	yield put(setLoadingIndicator({ isLoading: false, activityText: 'acabou o request' }));
 }
 
-export function setToken(action: any) {
-	console.log('action--> ', action);
+export function setHeadersAuthorization(action: any) {
 	if (!action.payload) return;
+
 	const { token } = action.payload.auth;
-	console.log('token--> ', token);
+
 	if (token) {
 		apiClient.defaults.headers.Authorization = `Bearer ${token}`;
 	}
@@ -65,7 +65,7 @@ export function setToken(action: any) {
 
 export default function* authSaga() {
 	yield all([
-		takeLatest('persist/REHYDRATE', setToken),
+		takeLatest('persist/REHYDRATE', setHeadersAuthorization),
 		takeLatest(UserActionTypes.SIGNIN_REQUEST, signIn),
 	]);
 }

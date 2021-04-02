@@ -1,19 +1,10 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import { getAuthenticationFromLocalStorage } from './../utils/localStorage';
+import axios from 'axios';
 
 const apiClient = axios.create({
 	baseURL: `${process.env.REACT_APP_BASE_URL}`,
 });
 
-// apiClient.interceptors.request.use((config: AxiosRequestConfig) => {
-// 	const { isAuthenticated, token } = getAuthenticationFromLocalStorage();
-// 	console.log('token ', token, isAuthenticated);
-
-// 	if (isAuthenticated) {
-// 		config.headers.Authorization = `Bearer ${token}`;
-// 	}
-
-// 	return config;
-// });
+/*Como estou usando Sagas a parte do interceptor para setar o header com o token
+está lá* */
 
 export default apiClient;

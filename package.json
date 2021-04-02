@@ -41,12 +41,13 @@
       "react-app",
       "react-app/jest"
     ],
-    "rules":{
-      "import/no-anonymous-default-export": ["error", {
-            "allowObject": true
-      }]
-    
-     
+    "rules": {
+      "import/no-anonymous-default-export": [
+        "error",
+        {
+          "allowObject": true
+        }
+      ]
     }
   },
   "browserslist": {
@@ -64,6 +65,7 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
     "@types/redux-logger": "^3.0.8",
+    "@types/redux-persist": "^4.3.1",
     "@types/styled-components": "^5.1.9"
   }
 }
