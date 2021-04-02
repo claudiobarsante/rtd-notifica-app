@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ErrorMessage } from '@hookform/error-message';
 //Types
 import { Credentials, LoadingIndicator } from '../../store/auth/types';
-import { ResponseError } from '../../types/response';
+//import { ResponseError } from '../../types/response';
 import { State } from '../../store/configureStore';
 //Saga actions
 import { signInRequest } from './../../store/auth/actions';
@@ -30,7 +30,7 @@ const SignIn = () => {
 	const { isLoading, activityText } = useSelector<State, LoadingIndicator>(
 		state => state.auth.loadingIndicator
 	);
-	const { code, message } = useSelector<State, ResponseError>(state => state.auth.error);
+	//const { code, message } = useSelector<State, ResponseError>(state => state.auth.error);
 	const isAuthenticated = useSelector<State, boolean>(state => state.auth.isAuthenticated);
 
 	const dispatch = useDispatch();
