@@ -1,5 +1,6 @@
 import { ResponseError } from '../../types/response';
-import { AuthState, Credentials, LoadingIndicator } from './types';
+import { AuthState, Credentials } from './types';
+import { LoadingIndicator } from '../../types/commom';
 
 export enum UserActionTypes {
 	SET_LOADING_INDICATOR = 'SET_LOADING_INDICATOR',

@@ -5,7 +5,8 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ErrorMessage } from '@hookform/error-message';
 //Types
-import { Credentials, LoadingIndicator } from '../../store/auth/types';
+import { Credentials } from '../../store/auth/types';
+import { LoadingIndicator } from '../../types/commom';
 //import { ResponseError } from '../../types/response';
 import { State } from '../../store/configureStore';
 //Saga actions

@@ -1,11 +1,7 @@
 import { ResponseError } from '../../types/response';
+import { LoadingIndicator } from '../../types/commom';
 
 //AuthState
-export type LoadingIndicator = {
-	activityText: string;
-	isLoading: boolean;
-};
-
 export type User = {
 	apelido: string;
 	institucionalId: number;

@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import authReducer from './auth/reducer';
-import test from './test/reducer';
+import notificacoesReducer from './notificacao/reducer';
 
 const persistConfig = {
 	key: '@rtdnotifica',
@@ -12,7 +12,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
 	auth: authReducer,
-	test,
+	notificacoes: notificacoesReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

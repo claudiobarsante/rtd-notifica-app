@@ -6,9 +6,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootSaga from './rootSaga';
 import { AuthState } from './auth/types';
 import logger from 'redux-logger';
+import { NotificacoesState } from './notificacao/types';
 
 export type State = {
 	auth: AuthState;
+	notificacoes: NotificacoesState;
 };
 
 const sagaMiddleware = createSagaMiddleware();

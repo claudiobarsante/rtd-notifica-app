@@ -1,13 +1,16 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-
-import sigInService from '../../services/authService';
 import { AxiosResponse } from 'axios';
+//Actions
 import { signInRequest, signInSuccess, signInFailure, setLoadingIndicator } from './actions';
-import { Response } from '../../types/response';
-
 import { UserActionTypes } from './actions';
-import { format } from '../../utils/formatErrorMessage';
+//ApiClient
 import apiClient from './../../api/client';
+//Services
+import sigInService from '../../services/authService';
+//Types
+import { Response } from '../../types/response';
+//Utils
+import { format } from '../../utils/formatErrorMessage';
 
 type signInRequestType = ReturnType<typeof signInRequest>;
 
