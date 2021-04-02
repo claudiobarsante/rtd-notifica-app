@@ -1,14 +1,9 @@
 import { all, call, put, takeLatest, select } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
-import {
-	getAllRequest,
-	getAllSuccess,
-	NotificacaoActionTypes,
-	setLoadingIndicator,
-} from './actions';
+import { getAllRequest, getAllSuccess, NotificacaoActionTypes } from './actions';
 import { State } from '../configureStore';
 import getAllNotificacoesService from './../../services/notificacaoService';
-import { Response } from '../../types/response';
+
 import { Notificacao } from './types';
 
 type getAllRequestType = ReturnType<typeof getAllRequest>;
