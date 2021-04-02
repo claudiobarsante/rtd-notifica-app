@@ -6,7 +6,8 @@ import { signInRequest, signInSuccess, signInFailure, setLoadingIndicator } from
 import { Response } from '../../types/response';
 
 import { UserActionTypes } from './actions';
-import { formatMessage } from '../../utils/errorMessage';
+import { format } from '../../utils/formatErrorMessage';
+import apiClient from './../../api/client';
 
 type signInRequestType = ReturnType<typeof signInRequest>;
 
@@ -19,6 +20,8 @@ function* signIn(action: signInRequestType) {
 		if (response.status === Response.OK) {
 			//
 			const { access_token, claims, expires_in, userName } = response.data;
+
+			apiClient.defaults.headers.Authorization = `Bearer ${access_token}`;
 
 			const userClaims = JSON.parse(claims);
 			const expirationDate = new Date(
@@ -43,13 +46,26 @@ function* signIn(action: signInRequestType) {
 			);
 		}
 	} catch (error) {
-		const { code, message } = formatMessage(error.toString());
+		const { code, message } = format(error.toString());
 		yield put(signInFailure({ code, message }));
 	}
 
 	yield put(setLoadingIndicator({ isLoading: false, activityText: 'acabou o request' }));
 }
 
+export function setToken(action: any) {
+	console.log('action--> ', action);
+	if (!action.payload) return;
+	const { token } = action.payload.auth;
+	console.log('token--> ', token);
+	if (token) {
+		apiClient.defaults.headers.Authorization = `Bearer ${token}`;
+	}
+}
+
 export default function* authSaga() {
-	yield all([takeLatest(UserActionTypes.SIGNIN_REQUEST, signIn)]);
+	yield all([
+		takeLatest('persist/REHYDRATE', setToken),
+		takeLatest(UserActionTypes.SIGNIN_REQUEST, signIn),
+	]);
 }

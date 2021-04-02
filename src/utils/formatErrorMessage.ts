@@ -3,7 +3,7 @@ type ReturnedErrorMessage = {
 	message: string;
 };
 
-export const formatMessage = (errorMessage: string): ReturnedErrorMessage => {
+export const format = (errorMessage: string): ReturnedErrorMessage => {
 	let code = 0;
 	let message = '';
 

@@ -5,7 +5,7 @@ import authReducer from './auth/reducer';
 import test from './test/reducer';
 
 const persistConfig = {
-	key: 'root',
+	key: '@rtdnotifica',
 	storage,
 	whitelist: ['auth'],
 };

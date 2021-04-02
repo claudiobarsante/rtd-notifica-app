@@ -10,10 +10,12 @@ type Authentication = {
 
 export const getAuthenticationFromLocalStorage = (): Authentication => {
 	//to avoid typescript error
-	const temp = localStorage.getItem('persist:root');
+	const temp = localStorage.getItem('persist:@rtdnotifica');
 	const auth = temp ? JSON.parse(temp) : {};
 	//
 	const { isAuthenticated, token } = JSON.parse(auth.auth);
+
+	console.log('get authentication ', token, isAuthenticated);
 
 	return { isAuthenticated, token };
 };
