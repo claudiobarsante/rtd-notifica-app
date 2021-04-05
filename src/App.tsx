@@ -5,10 +5,12 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store/configureStore';
 import SignIn from './pages/SignIn';
 import Overview from './pages/Overview/index';
+import GlobalStyle from './styles/global';
 
 function App() {
 	return (
 		<Provider store={store}>
+			<GlobalStyle />
 			<Router>
 				<PersistGate persistor={persistor}>
 					<Switch>

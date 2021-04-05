@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ErrorMessage } from '@hookform/error-message';
+import { AiOutlineLock, AiOutlineUser } from 'react-icons/ai';
 //Types
 import { Credentials } from '../../store/auth/types';
 import { LoadingIndicator } from '../../types/commom';
@@ -13,6 +14,10 @@ import { State } from '../../store/configureStore';
 import { signInRequest } from './../../store/auth/actions';
 //Styles
 import { Container } from './styles';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+
+import rtdNotificaImg from '../../assets/rtdnotifica.png';
 
 const SignInSchema = yup.object().shape({
 	email: yup
@@ -28,6 +33,7 @@ const SignIn = () => {
 		mode: 'onBlur',
 	});
 
+	//console.log('sign ', errors);
 	const { isLoading, activityText } = useSelector<State, LoadingIndicator>(
 		state => state.auth.loadingIndicator
 	);
@@ -45,20 +51,32 @@ const SignIn = () => {
 	}
 	return (
 		<Container>
-			<h1>signin</h1>
-			<p>{`isLoading === ${isLoading} e activitytext=>${activityText}`}</p>
+			<img src={rtdNotificaImg} alt='Logo da aplicação RtdNotifica App' />
+
 			<form onSubmit={handleSubmit(submitForm)}>
 				<ErrorMessage name='email' errors={errors} render={({ message }) => <p>{message}</p>} />
-				<input id='email' name='email' type='text' placeholder='email' ref={register} />
+				<Input
+					id='email'
+					name='email'
+					type='text'
+					placeholder='E-mail do usuário'
+					inputRef={register}
+					error={errors.email?.message}
+					icon={AiOutlineUser}
+				/>
+
 				<ErrorMessage name='password' errors={errors} render={({ message }) => <p>{message}</p>} />
-				<input
+				<Input
 					id='password'
 					name='password'
 					type='password'
-					placeholder='password'
-					ref={register}
+					placeholder='Senha do usuário'
+					inputRef={register}
+					error={errors.password?.message}
+					icon={AiOutlineLock}
 				/>
-				<button type='submit'>Submit</button>
+
+				<Button type='submit'>Entrar</Button>
 			</form>
 		</Container>
 	);
