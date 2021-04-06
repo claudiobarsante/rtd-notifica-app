@@ -34,9 +34,9 @@ const SignIn = () => {
 	});
 
 	//console.log('sign ', errors);
-	const { isLoading, activityText } = useSelector<State, LoadingIndicator>(
-		state => state.auth.loadingIndicator
-	);
+	//const { isLoading, activityText } = useSelector<State, LoadingIndicator>(
+	//	state => state.auth.loadingIndicator
+	//);
 	//const { code, message } = useSelector<State, ResponseError>(state => state.auth.error);
 	const isAuthenticated = useSelector<State, boolean>(state => state.auth.isAuthenticated);
 
