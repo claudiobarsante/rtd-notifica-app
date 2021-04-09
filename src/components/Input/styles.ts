@@ -21,16 +21,14 @@ export const Container = styled.div<ContainerProps>`
 	${props =>
 		props.isFocused &&
 		css`
-			border-color: var(--purple);
-			color: var(--purple);
+			border: 3px solid var(--purple);
 			transition: border-color 1s, color 1s;
 		`}
 
 	${props =>
 		props.isErrored &&
 		css`
-			border-color: var(--error);
-			color: var(--error);
+			border: 3px solid var(--error);
 			transition: border-color 1s, color 1s;
 		`}  
     

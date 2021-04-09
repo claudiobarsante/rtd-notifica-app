@@ -3,9 +3,9 @@ import { ButtonHTMLAttributes } from 'react';
 import { Container } from './styles';
 
 //could use type rather than interface because it's not overwriting or extending
-interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-const Button = ({ children, ...rest }: IProps) => (
+const Button = ({ children, ...rest }: Props) => (
 	<Container type='button' {...rest}>
 		{children}
 	</Container>
