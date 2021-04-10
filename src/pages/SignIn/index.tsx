@@ -7,7 +7,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import { AiOutlineLock, AiOutlineUser } from 'react-icons/ai';
 //Types
 import { Credentials } from '../../store/auth/types';
-import { LoadingIndicator } from '../../types/commom';
+//import { LoadingIndicator } from '../../types/commom';
 //import { ResponseError } from '../../types/response';
 import { State } from '../../store/configureStore';
 //Saga actions
