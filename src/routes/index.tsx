@@ -1,7 +1,10 @@
+import { lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SignIn from './../pages/SignIn/index';
+
 import ProtectedRoute from './ProtectedRoute';
-import Overview from './../pages/Overview/index';
+
+const Overview = lazy(() => import('./../pages/Overview/index'));
 
 const index = () => {
 	return (
