@@ -1,17 +1,22 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import SignIn from './../pages/SignIn/index';
+import ErrorBoundary from './../components/Error-Boundary/index';
 
 import ProtectedRoute from './ProtectedRoute';
 
+const SignIn = lazy(() => import('./../pages/SignIn/index'));
 const Overview = lazy(() => import('./../pages/Overview/index'));
 
 const index = () => {
 	return (
 		<Router>
 			<Switch>
-				<Route path='/' exact component={SignIn} />
-				<ProtectedRoute path='/overview' component={Overview} isProtected />
+				<ErrorBoundary>
+					<Suspense fallback={<div>...Loading</div>}>
+						<Route path='/' exact component={SignIn} />
+						<ProtectedRoute path='/overview' component={Overview} isProtected />
+					</Suspense>
+				</ErrorBoundary>
 			</Switch>
 		</Router>
 	);
