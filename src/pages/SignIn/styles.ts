@@ -13,7 +13,8 @@ export const Container = styled.div`
 
 	img {
 		position: absolute;
-		top: -8rem;
+		top: -1.5rem;
+		height: 40rem;
 	}
 
 	p {

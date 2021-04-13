@@ -6,7 +6,7 @@ export const Container = styled.button`
 	height: 5.6rem;
 	border-radius: 1rem;
 	border: 0;
-	background: var(--lightBlue);
+	background: var(--purple);
 	color: var(--white);
 	font-weight: 500;
 	margin-top: 2.4rem;
@@ -16,6 +16,6 @@ export const Container = styled.button`
 	font-size: 2rem;
 
 	&:hover {
-		background: ${shade(0.2, '#007aff')};
+		background: ${shade(0.2, '#788EEC')};
 	}
 `;

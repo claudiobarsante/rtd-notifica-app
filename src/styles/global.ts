@@ -26,14 +26,8 @@ body{
     -webkit-font-smoothing: antialiased;
 }
 
-body,input, button{
-    font-family:'Roboto', serif;
-    font-size: 1.6rem;
-    }
 
-    h1,h2,h3,h4,h5,h6, strong {
-        font-weight: 500;
-    }
+  
 
     button {
         cursor:pointer;

@@ -13,7 +13,11 @@ const Overview = () => {
 		dispatch(getAllRequest(oficioId));
 	}, [dispatch, oficioId]);
 
-	return <Container>Overview</Container>;
+	return (
+		<Container>
+			<h1>Overview page</h1>
+		</Container>
+	);
 };
 
 export default Overview;
