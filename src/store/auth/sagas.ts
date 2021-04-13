@@ -1,5 +1,6 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
+import { toastr } from 'react-redux-toastr';
 //Actions
 import { signInRequest, signInSuccess, signInFailure, setLoadingIndicator } from './actions';
 import { UserActionTypes } from './actions';
@@ -50,6 +51,7 @@ function* signIn(action: signInRequestType) {
 		}
 	} catch (error) {
 		const { code, message } = format(error.toString());
+		toastr.error('Error', message);
 		yield put(signInFailure({ code, message }));
 	}
 

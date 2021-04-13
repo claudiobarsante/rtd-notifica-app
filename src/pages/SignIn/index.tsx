@@ -1,4 +1,5 @@
 import { Redirect } from 'react-router';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -18,6 +19,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 
 import rtdNotificaImg from '../../assets/rtdnotifica.png';
+import { ResponseError } from '../../types/response';
 
 const SignInSchema = yup.object().shape({
 	email: yup
@@ -33,22 +35,27 @@ const SignIn = () => {
 		mode: 'onBlur',
 	});
 
-	//console.log('sign ', errors);
 	//const { isLoading, activityText } = useSelector<State, LoadingIndicator>(
 	//	state => state.auth.loadingIndicator
 	//);
-	//const { code, message } = useSelector<State, ResponseError>(state => state.auth.error);
+	// const { code, message } = useSelector<State, ResponseError>(state => state.auth.error);
+	// const hasError = code > 0;
+	// console.log('sign ', code);
+
 	const isAuthenticated = useSelector<State, boolean>(state => state.auth.isAuthenticated);
 
 	const dispatch = useDispatch();
+	//const { addToast } = useToasts();
 
 	const submitForm = async ({ email, password }: Credentials) => {
-		dispatch(signInRequest({ email: 'user@demo.com.br', password: 'Demo@2020' }));
+		//dispatch(signInRequest({ email: 'ser@demo.com.br', password: 'Demo@2020' }));
+		dispatch(signInRequest({ email, password }));
 	};
 
 	if (isAuthenticated) {
 		return <Redirect to='/overview' />;
 	}
+
 	return (
 		<Container>
 			<img src={rtdNotificaImg} alt='Logo da aplicação RtdNotifica App' />
