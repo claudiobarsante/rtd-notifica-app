@@ -12,16 +12,15 @@ html{
 }
 
 :root {
-    --error:#c53030;
-    --lightBlue:#007aff;
+  --error:#c53030;
+  --lightBlue:#007aff;
   --success: #73bd73;
   --purple:#788EEC;
   --white:#F4EDE8;
   --gray:#f3f2f2;
   --gray-hard:#666360;
-
-
 }
+
 
 body{
     -webkit-font-smoothing: antialiased;

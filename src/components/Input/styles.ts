@@ -39,7 +39,8 @@ export const Container = styled.div<ContainerProps>`
 		border: 0;
 		outline: 0;
 		color: var(--gray-hard);
-		font-size: 1.7rem;
+		font-size: 1.8rem;
+		margin: 0.2rem;
 
 		&::placeholder {
 			color: var(--gray-hard);
