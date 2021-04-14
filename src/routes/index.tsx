@@ -1,11 +1,11 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import ErrorBoundary from './../components/Error-Boundary/index';
+import ErrorBoundary from '../components/error-boundary/index';
 
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from './protectedRoute';
 
-const SignIn = lazy(() => import('./../pages/SignIn/index'));
-const Overview = lazy(() => import('./../pages/Overview/index'));
+const SignIn = lazy(() => import('../pages/sign-in/index'));
+const Overview = lazy(() => import('../pages/overview/index'));
 
 const index = () => {
 	return (

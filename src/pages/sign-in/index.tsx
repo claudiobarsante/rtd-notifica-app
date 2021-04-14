@@ -12,11 +12,11 @@ import { Credentials } from '../../store/auth/types';
 //import { ResponseError } from '../../types/response';
 import { State } from '../../store/configureStore';
 //Saga actions
-import { signInRequest } from './../../store/auth/actions';
+import { signInRequest } from '../../store/auth/actions';
 //Styles
 import { Container } from './styles';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
+import Button from '../../components/button';
+import Input from '../../components/input';
 
 import rtdNotificaImg from '../../assets/rtdnotifica.png';
 import { ResponseError } from '../../types/response';

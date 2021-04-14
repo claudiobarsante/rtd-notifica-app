@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../../store/configureStore';
 import { Container } from './styles';
 
-import { getAllRequest } from './../../store/notificacao/actions';
+import { getAllRequest } from '../../store/notificacao/actions';
 
 const Overview = () => {
 	const oficioId = useSelector<State, number>(state => state.auth.currentUser.oficioId);
