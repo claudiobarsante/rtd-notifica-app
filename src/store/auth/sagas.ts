@@ -15,7 +15,7 @@ import { format } from '../../utils/formatErrorMessage';
 
 type signInRequestType = ReturnType<typeof signInRequest>;
 
-function* signIn(action: signInRequestType) {
+export function* signIn(action: signInRequestType) {
 	//
 	try {
 		yield put(setLoadingIndicator({ isLoading: true, activityText: 'carregando request' }));
@@ -58,19 +58,19 @@ function* signIn(action: signInRequestType) {
 	yield put(setLoadingIndicator({ isLoading: false, activityText: 'acabou o request' }));
 }
 
-// export function setHeadersAuthorization(action: any) {
-// 	if (!action.payload) return;
+export function setHeadersAuthorization(action: any) {
+	if (!action.payload) return;
 
-// 	const { token } = action.payload.auth;
+	const { token } = action.payload.auth;
 
-// 	if (token) {
-// 		apiClient.defaults.headers.Authorization = `Bearer ${token}`;
-// 	}
-// }
+	if (token) {
+		apiClient.defaults.headers.Authorization = `Bearer ${token}`;
+	}
+}
 
 export default function* authSaga() {
 	yield all([
-		//takeLatest('persist/REHYDRATE', setHeadersAuthorization),
+		takeLatest('persist/REHYDRATE', setHeadersAuthorization),
 		takeLatest(UserActionTypes.SIGNIN_REQUEST, signIn),
 	]);
 }
