@@ -51,26 +51,26 @@ function* signIn(action: signInRequestType) {
 		}
 	} catch (error) {
 		const { code, message } = format(error.toString());
-		toastr.error('Error', message);
+		toastr.error('Login', message);
 		yield put(signInFailure({ code, message }));
 	}
 
 	yield put(setLoadingIndicator({ isLoading: false, activityText: 'acabou o request' }));
 }
 
-export function setHeadersAuthorization(action: any) {
-	if (!action.payload) return;
+// export function setHeadersAuthorization(action: any) {
+// 	if (!action.payload) return;
 
-	const { token } = action.payload.auth;
+// 	const { token } = action.payload.auth;
 
-	if (token) {
-		apiClient.defaults.headers.Authorization = `Bearer ${token}`;
-	}
-}
+// 	if (token) {
+// 		apiClient.defaults.headers.Authorization = `Bearer ${token}`;
+// 	}
+// }
 
 export default function* authSaga() {
 	yield all([
-		takeLatest('persist/REHYDRATE', setHeadersAuthorization),
+		//takeLatest('persist/REHYDRATE', setHeadersAuthorization),
 		takeLatest(UserActionTypes.SIGNIN_REQUEST, signIn),
 	]);
 }
