@@ -37,11 +37,11 @@ const mockAction = {
 // });
 
 /*testando com redux-saga-test-plan */
-it('setLoadingIndicator', () => {
-	return expectSaga(signIn, mockAction)
-		.dispatch(setLoadingIndicator({ isLoading: true, activityText: 'carregando request' }))
-		.silentRun();
-});
+// it('setLoadingIndicator', () => {
+// 	return expectSaga(signIn, mockAction)
+// 		.put(setLoadingIndicator({ isLoading: true, activityText: 'carregando request' }))
+// 		.silentRun();
+// });
 
 // it('Api', () => {
 // 	return expectSaga(signIn, mockAction)
@@ -71,15 +71,57 @@ const state = {
 	},
 	token: '',
 };
-it('signInFailure with error 400', () => {
-	return (
-		expectSaga(signIn, mockAction)
-			//.provide([[call(sigInService, { email: '12@gmail.com', password: '123' }), error]])
-			.dispatch(signInFailure(error))
-			.silentRun()
-	);
+
+// it('signInFailure with error 400', () => {
+// 	return (
+// 		expectSaga(signIn, mockAction)
+// 			//.provide([[call(sigInService, { email: '12@gmail.com', password: '123' }), error]])
+// 			.dispatch(signInFailure(error))
+// 			.silentRun()
+// 	);
+// });
+
+// it('Reducer state with error 400', () => {
+// 	return expectSaga(signIn, mockAction).withReducer(authReducer).hasFinalState(state).silentRun();
+// });
+
+const responseOk = {
+	currentUser: {
+		apelido: 'fake-nickname',
+		institucionalId: 99,
+		oficioId: 99,
+		userId: 'fake-user-id',
+		userName: 'fake-user-name',
+	},
+	error: { code: 0, message: '' },
+	expirationDate: new Date(),
+	isAuthenticated: true,
+	loadingIndicator: { isLoading: false, activityText: '' },
+	token: 'fake-access-token',
+};
+
+it('SignIn success', () => {
+	return expectSaga(signIn, mockAction)
+		.provide([
+			[call(sigInService, { email: 'user@demo.com.br', password: 'Dmo@2020' }), responseOk],
+		])
+		.dispatch(signInSuccess(responseOk))
+
+		.silentRun();
 });
 
-it('Reducer state with error 400', () => {
-	return expectSaga(signIn, mockAction).withReducer(authReducer).hasFinalState(state).silentRun();
+it('Reducer state with sign-in-success', () => {
+	return expectSaga(signIn, mockAction)
+		.withReducer(authReducer)
+		.provide([[call(sigInService, { email: '12@gmail.com', password: '123' }), responseOk]])
+		.dispatch(signInSuccess(responseOk))
+
+		.hasFinalState(responseOk)
+		.silentRun();
 });
+
+// it('setLoadingIndicator-false', () => {
+// 	return expectSaga(signIn, mockAction)
+// 		.put(setLoadingIndicator({ isLoading: false, activityText: 'acabou o request' }))
+// 		.silentRun();
+// });
