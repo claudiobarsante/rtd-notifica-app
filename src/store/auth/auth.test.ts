@@ -39,7 +39,7 @@ const mockAction = {
 /*testando com redux-saga-test-plan */
 it('setLoadingIndicator', () => {
 	return expectSaga(signIn, mockAction)
-		.put(setLoadingIndicator({ isLoading: true, activityText: 'carregando request' }))
+		.dispatch(setLoadingIndicator({ isLoading: true, activityText: 'carregando request' }))
 		.silentRun();
 });
 
@@ -71,23 +71,15 @@ const state = {
 	},
 	token: '',
 };
-it('Api error', () => {
+it('signInFailure with error 400', () => {
 	return (
 		expectSaga(signIn, mockAction)
 			//.provide([[call(sigInService, { email: '12@gmail.com', password: '123' }), error]])
 			.dispatch(signInFailure(error))
-
 			.silentRun()
 	);
 });
 
-it('Api', () => {
-	return (
-		expectSaga(signIn, mockAction)
-			.withReducer(authReducer)
-			//.provide([[call(sigInService, { email: '12@gmail.com', password: '123' }), error]])
-			//.dispatch(signInFailure(error))
-			.hasFinalState(state)
-			.silentRun()
-	);
+it('Reducer state with error 400', () => {
+	return expectSaga(signIn, mockAction).withReducer(authReducer).hasFinalState(state).silentRun();
 });
