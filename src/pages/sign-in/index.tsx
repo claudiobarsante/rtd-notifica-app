@@ -48,7 +48,7 @@ const SignIn = () => {
 	//const { addToast } = useToasts();
 
 	const submitForm = async ({ email, password }: Credentials) => {
-		//dispatch(signInRequest({ email: 'ser@demo.com.br', password: 'Demo@2020' }));
+		//dispatch(signInRequest({ email: 'User@demo.com.br', password: 'Demo@2020' }));
 		dispatch(signInRequest({ email, password }));
 	};
 

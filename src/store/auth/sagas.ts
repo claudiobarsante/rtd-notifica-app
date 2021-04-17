@@ -18,7 +18,7 @@ type signInRequestType = ReturnType<typeof signInRequest>;
 export function* signIn(action: signInRequestType) {
 	//
 	try {
-		yield put(setLoadingIndicator({ isLoading: true, activityText: 'carregando request' }));
+		put(setLoadingIndicator({ isLoading: true, activityText: 'carregando request' }));
 		const response: AxiosResponse = yield call(sigInService, action.payload);
 
 		if (response.status === Response.OK) {
