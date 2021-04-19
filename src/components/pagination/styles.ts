@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-
+interface PageButtonProps {
+	clicked: boolean;
+}
 export const Container = styled.div`
 	display: flex;
 	align-items: center;
@@ -16,9 +18,10 @@ export const ActionButton = styled.button`
 	cursor: pointer;
 `;
 
-export const PageButton = styled.button`
-	background: #fff;
-	border: 2px solid #666;
+export const PageButton = styled.a<PageButtonProps>`
+	background: ${({ clicked }: PageButtonProps) => (clicked ? 'yellow' : 'white')};
+	//border: ${({ clicked }: PageButtonProps) => (clicked ? '2px solid red' : '2px solid #666')};
+	border: ${({ clicked }: PageButtonProps) => (clicked ? '4px solid purple' : '4px solid green')};
 	padding: 10px 15px;
 	border-radius: 50%;
 	height: 45px;
@@ -27,10 +30,16 @@ export const PageButton = styled.button`
 	margin: 0 5px;
 	cursor: pointer;
 
+	&:hover {
+		border: 4px solid blue;
+		background: yellow;
+	}
+
 	span {
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, -50%);
+		color: ${({ clicked }: PageButtonProps) => (clicked ? 'yellow' : 'red')};
+		//transform: translate(-50%, -50%);
 	}
 `;

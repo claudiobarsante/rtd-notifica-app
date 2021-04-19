@@ -10,8 +10,9 @@ import Pagination from '../../components/pagination';
 const Overview = () => {
 	//
 	const [pages, setPages] = useState<number[]>([]);
-	const [recordsPerPage, setRecordsPerPage] = useState(10);
+	const [recordsPerPage, setRecordsPerPage] = useState<number>(10);
 	const [page, setPage] = useState<Notificacao[]>([]);
+	const [currentPage, setCurrentPage] = useState<number>(0);
 
 	const oficioId = useSelector<State, number>(state => state.auth.currentUser.oficioId);
 	const filtered = useSelector<State, Notificacao[]>(
@@ -38,7 +39,7 @@ const Overview = () => {
 
 	useEffect(() => {
 		dispatch(getAllRequest(oficioId));
-		console.log('filtered ', filtered.length);
+
 		const countPages = Math.ceil(filtered.length / recordsPerPage);
 		let pages = [];
 		for (let i = 1; i <= 20; i++) {
@@ -48,6 +49,7 @@ const Overview = () => {
 	}, [dispatch, filtered.length, oficioId, recordsPerPage]);
 
 	useEffect(() => {
+		console.log('passei..........');
 		if (pages) {
 			loadRecordsToPage(1);
 		}
@@ -57,6 +59,7 @@ const Overview = () => {
 		(currentPage: number) => {
 			console.log('page cliked ', currentPage);
 			loadRecordsToPage(currentPage);
+			setCurrentPage(currentPage);
 		},
 		[loadRecordsToPage]
 	);
@@ -83,7 +86,7 @@ const Overview = () => {
 						))}
 				</tbody>
 			</table>
-			<Pagination pages={pages} onClick={handlePageChange} />
+			<Pagination pages={pages} onClick={handlePageChange} currentPage={currentPage} />
 		</Container>
 	);
 };
