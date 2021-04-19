@@ -9,10 +9,10 @@ import Pagination from '../../components/pagination';
 
 const Overview = () => {
 	//
-	const [pages, setPages] = useState<number[]>([]);
+	const [totalPages, setTotalPages] = useState<number>(0);
 	const [recordsPerPage, setRecordsPerPage] = useState<number>(10);
 	const [page, setPage] = useState<Notificacao[]>([]);
-	const [currentPage, setCurrentPage] = useState<number>(0);
+	const [currentPage, setCurrentPage] = useState<number>(1);
 
 	const oficioId = useSelector<State, number>(state => state.auth.currentUser.oficioId);
 	const filtered = useSelector<State, Notificacao[]>(
@@ -39,21 +39,10 @@ const Overview = () => {
 
 	useEffect(() => {
 		dispatch(getAllRequest(oficioId));
-
+		console.log('useEffect ....====');
 		const countPages = Math.ceil(filtered.length / recordsPerPage);
-		let pages = [];
-		for (let i = 1; i <= 20; i++) {
-			pages.push(i);
-		}
-		setPages(pages);
+		setTotalPages(countPages);
 	}, [dispatch, filtered.length, oficioId, recordsPerPage]);
-
-	useEffect(() => {
-		console.log('passei..........');
-		if (pages) {
-			loadRecordsToPage(1);
-		}
-	}, [loadRecordsToPage, pages]);
 
 	const handlePageChange = useCallback(
 		(currentPage: number) => {
@@ -62,6 +51,35 @@ const Overview = () => {
 			setCurrentPage(currentPage);
 		},
 		[loadRecordsToPage]
+	);
+
+	useEffect(() => {
+		console.log('passei..........');
+		if (totalPages) {
+			loadRecordsToPage(1);
+		}
+	}, [loadRecordsToPage, totalPages]);
+
+	const handlePreviousClick = useCallback(
+		(currentPage: number) => {
+			if (currentPage === 1) return;
+
+			const newPage = currentPage - 1;
+			loadRecordsToPage(newPage);
+			setCurrentPage(newPage);
+		},
+		[loadRecordsToPage]
+	);
+
+	const handleNextClick = useCallback(
+		(currentPage: number) => {
+			if (currentPage === filtered.length) return;
+
+			const newPage = currentPage + 1;
+			loadRecordsToPage(newPage);
+			setCurrentPage(newPage);
+		},
+		[filtered.length, loadRecordsToPage]
 	);
 
 	return (
@@ -86,7 +104,12 @@ const Overview = () => {
 						))}
 				</tbody>
 			</table>
-			<Pagination pages={pages} onClick={handlePageChange} currentPage={currentPage} />
+			<Pagination
+				totalPages={totalPages}
+				onPreviousClick={handlePreviousClick}
+				onNextClick={handleNextClick}
+				currentPage={currentPage}
+			/>
 		</Container>
 	);
 };
