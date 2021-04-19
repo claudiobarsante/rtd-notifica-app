@@ -4,9 +4,13 @@ import { State } from '../../store/configureStore';
 import { Container } from './styles';
 
 import { getAllRequest } from '../../store/notificacao/actions';
+import { Notificacao } from '../../store/notificacao/types';
 
 const Overview = () => {
 	const oficioId = useSelector<State, number>(state => state.auth.currentUser.oficioId);
+	const filtered = useSelector<State, Notificacao[]>(
+		state => state.notificacoes.filteredNotificacoes
+	);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
