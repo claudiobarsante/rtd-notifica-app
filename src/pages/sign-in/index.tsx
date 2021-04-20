@@ -61,7 +61,11 @@ const SignIn = () => {
 			<img src={rtdNotificaImg} alt='Logo da aplicação RtdNotifica App' />
 
 			<form onSubmit={handleSubmit(submitForm)}>
-				<ErrorMessage name='email' errors={errors} render={({ message }) => <p>{message}</p>} />
+				<ErrorMessage
+					name='email'
+					errors={errors}
+					render={({ message }) => <p id='test-email-error'>{message}</p>}
+				/>
 				<Input
 					id='email'
 					name='email'
@@ -72,7 +76,11 @@ const SignIn = () => {
 					icon={AiOutlineUser}
 				/>
 
-				<ErrorMessage name='password' errors={errors} render={({ message }) => <p>{message}</p>} />
+				<ErrorMessage
+					name='password'
+					errors={errors}
+					render={({ message }) => <p id='test-password-error'>{message}</p>}
+				/>
 				<Input
 					id='password'
 					name='password'
