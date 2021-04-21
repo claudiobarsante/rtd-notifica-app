@@ -1,7 +1,9 @@
 describe('SignIn form validation', () => {
-	it('displays errors when the form is invalid', () => {
+	beforeEach(() => {
 		cy.visit('/');
+	});
 
+	it('displays errors when the form is invalid', () => {
 		cy.get('form').get('button[type="submit"]').click();
 
 		cy.get('#test-email-error').should('have.text', 'E-mail é um campo obrigatório');
@@ -13,8 +15,6 @@ describe('SignIn form validation', () => {
 	});
 
 	it('displays no errors when the form is valid', () => {
-		cy.visit('/');
-
 		cy.get('#email').type('user@demo.com.br');
 		cy.get('#password').type('Demo@2020');
 
