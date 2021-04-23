@@ -9,7 +9,7 @@ import apiClient from './../../api/client';
 //Services
 import sigInService from '../../services/authService';
 //Types
-import { Response } from '../../types/response';
+import { ResponseCode } from '../../types/response';
 //Utils
 import { format } from '../../utils/formatErrorMessage';
 
@@ -21,7 +21,7 @@ export function* signIn(action: signInRequestType) {
 		put(setLoadingIndicator({ isLoading: true, activityText: 'carregando request' }));
 		const response: AxiosResponse = yield call(sigInService, action.payload);
 
-		if (response.status === Response.OK) {
+		if (response.status === ResponseCode.OK) {
 			//
 			const { access_token, claims, expires_in, userName } = response.data;
 

@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ErrorBoundary from '../components/error-boundary/index';
+import Teste from '../pages/teste';
 
 import ProtectedRoute from './ProtectedRoute';
 
@@ -14,6 +15,7 @@ const index = () => {
 				<ErrorBoundary>
 					<Suspense fallback={<div>...Loading</div>}>
 						<Route path='/' exact component={SignIn} />
+						<Route path='/teste' component={Teste} />
 						<ProtectedRoute path='/overview' component={Overview} isProtected />
 					</Suspense>
 				</ErrorBoundary>
