@@ -14,7 +14,7 @@ import { State } from '../../store/configureStore';
 //Saga actions
 import { signInRequest } from '../../store/auth/actions';
 //Styles
-import { Container } from './styles';
+import * as S from './styles';
 import Button from '../../components/button';
 import Input from '../../components/input';
 
@@ -57,7 +57,7 @@ const SignIn = () => {
 	}
 
 	return (
-		<Container>
+		<S.Container>
 			<img src={rtdNotificaImg} alt='Logo da aplicação RtdNotifica App' />
 
 			<form onSubmit={handleSubmit(submitForm)}>
@@ -93,7 +93,7 @@ const SignIn = () => {
 
 				<Button type='submit'>Entrar</Button>
 			</form>
-		</Container>
+		</S.Container>
 	);
 };
 

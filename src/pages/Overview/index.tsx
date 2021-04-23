@@ -2,10 +2,13 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../../store/configureStore';
 import { Container } from './styles';
-
+import Modal from 'react-modal';
 import { getAllRequest } from '../../store/notificacao/actions';
 import { Notificacao } from '../../store/notificacao/types';
 import Pagination from '../../components/pagination';
+import { ResponseError, ResponseCode } from '../../types/response';
+import { Redirect, useHistory } from 'react-router-dom';
+import { resetUserState } from '../../store/auth/actions';
 
 const Overview = () => {
 	//
@@ -18,8 +21,12 @@ const Overview = () => {
 	const filtered = useSelector<State, Notificacao[]>(
 		state => state.notificacoes.filteredNotificacoes
 	);
+	Modal.setAppElement('#root');
 
+	//const { code, message } = useSelector<State, ResponseError>(state => state.notificacoes.error);
+	const code = 401;
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const loadRecordsToPage = useCallback(
 		(currentPage: number) => {
@@ -39,7 +46,7 @@ const Overview = () => {
 
 	useEffect(() => {
 		dispatch(getAllRequest(oficioId));
-		console.log('useEffect ....====');
+
 		const countPages = Math.ceil(filtered.length / recordsPerPage);
 		setTotalPages(countPages);
 	}, [dispatch, filtered.length, oficioId, recordsPerPage]);
@@ -59,6 +66,11 @@ const Overview = () => {
 			loadRecordsToPage(1);
 		}
 	}, [loadRecordsToPage, totalPages]);
+
+	const handleCloseModal = useCallback(() => {
+		dispatch(resetUserState());
+		history.push('/');
+	}, [dispatch, history]);
 
 	const handlePreviousClick = useCallback(
 		(currentPage: number) => {
@@ -81,6 +93,23 @@ const Overview = () => {
 		},
 		[filtered.length, loadRecordsToPage]
 	);
+	const customStyles = {
+		content: {
+			top: '50%',
+			left: '50%',
+			right: 'auto',
+			bottom: 'auto',
+			marginRight: '-50%',
+			transform: 'translate(-50%, -50%)',
+		},
+	};
+	if (code === ResponseCode.UNAUTHORIZED) {
+		return (
+			<Modal isOpen={true} onRequestClose={handleCloseModal} style={customStyles}>
+				<button onClick={handleCloseModal}>Close Modal</button>
+			</Modal>
+		);
+	}
 
 	return (
 		<Container>

@@ -1,6 +1,7 @@
 import { all, call, put, takeLatest, select } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import {
+	getAllFailure,
 	getAllRequest,
 	getAllSuccess,
 	NotificacaoActionTypes,
@@ -10,6 +11,7 @@ import { State } from '../configureStore';
 import getAllNotificacoesService from './../../services/notificacaoService';
 
 import { Notificacao } from './types';
+import { format } from '../../utils/formatErrorMessage';
 
 type getAllRequestType = ReturnType<typeof getAllRequest>;
 
@@ -24,7 +26,10 @@ function* getAll(action: getAllRequestType) {
 		const notificacoes: Notificacao[] = JSON.parse(response.data);
 
 		yield put(getAllSuccess(notificacoes));
-	} catch (error) {}
+	} catch (error) {
+		const { code, message } = format(error.toString());
+		yield put(getAllFailure({ code, message }));
+	}
 }
 
 export default function* notificacoesSaga() {

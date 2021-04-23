@@ -24,9 +24,9 @@ describe('Testing signIn', () => {
 	const sigInService = jest.fn();
 	const mockAction = {
 		type: UserActionTypes.SIGNIN_REQUEST,
-		payload: { email: '123@gmail.com', password: '123' },
+		payload: { 'User@demo.com.br', password: 'Demo@2020' },
 	};
-	const it = sagaHelper(authSaga());
+	const it = sagaHelper(signIn(action: signInRequestType));
 
 	it('should put setLoadingIndicator', result => {
 		console.log('result ', result);

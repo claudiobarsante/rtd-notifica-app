@@ -7,6 +7,7 @@ export enum UserActionTypes {
 	SIGNIN_REQUEST = 'SIGNIN_REQUEST',
 	SIGNIN_SUCCESS = 'SIGNIN_SUCCESS',
 	SIGNIN_FAILURE = 'SIGNIN_FAILURE',
+	RESET_USER_STATE = 'RESET_USER_STATE',
 }
 
 export function setLoadingIndicator({ isLoading, activityText }: LoadingIndicator) {
@@ -33,5 +34,10 @@ export function signInFailure(error: ResponseError) {
 	return {
 		type: UserActionTypes.SIGNIN_FAILURE,
 		payload: error,
+	};
+}
+export function resetUserState() {
+	return {
+		type: UserActionTypes.RESET_USER_STATE,
 	};
 }

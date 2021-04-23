@@ -50,6 +50,25 @@ const authReducer: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
 				isAuthenticated: false,
 				token: '',
 			};
+		case UserActionTypes.RESET_USER_STATE:
+			return {
+				...state,
+				currentUser: {
+					apelido: '',
+					institucionalId: 0,
+					oficioId: 0,
+					userId: '',
+					userName: '',
+				},
+				error: { code: 0, message: '' },
+				expirationDate: undefined,
+				isAuthenticated: false,
+				loadingIndicator: {
+					isLoading: false,
+					activityText: '',
+				},
+				token: '',
+			};
 		default:
 			return state;
 	}
