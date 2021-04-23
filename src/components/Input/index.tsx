@@ -1,7 +1,7 @@
 import React, { useCallback, useState, InputHTMLAttributes } from 'react';
 import { IconBaseProps } from 'react-icons';
 /**/
-import { Container } from './styles';
+import * as S from './styles';
 
 /*
 1-To extend all properties of the input 
@@ -28,7 +28,7 @@ const Input = ({ name, inputRef, error, icon: Icon, ...rest }: Props) => {
 
 	console.log('err ', error);
 	return (
-		<Container isErrored={!!error} isFocused={isFocused}>
+		<S.Container isErrored={!!error} isFocused={isFocused}>
 			{Icon && <Icon size={24} />}
 			<input
 				name={name}
@@ -37,7 +37,7 @@ const Input = ({ name, inputRef, error, icon: Icon, ...rest }: Props) => {
 				ref={inputRef}
 				{...rest}
 			/>
-		</Container>
+		</S.Container>
 	);
 };
 

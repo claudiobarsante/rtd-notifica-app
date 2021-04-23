@@ -34,9 +34,10 @@ const notificacoesReducer: Reducer<NotificacoesState> = (state = INITIAL_STATE, 
 				lastUpdate: new Date(),
 			};
 		case NotificacaoActionTypes.GET_ALL_FAILURE:
+			console.log('error ', payload);
 			return {
 				...state,
-				error: payload.error,
+				error: payload,
 			};
 
 		default:

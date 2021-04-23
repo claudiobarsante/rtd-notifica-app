@@ -38,10 +38,15 @@ const Overview = () => {
 	);
 
 	useEffect(() => {
-		dispatch(getAllRequest(oficioId));
-		console.log('useEffect ....====');
-		const countPages = Math.ceil(filtered.length / recordsPerPage);
-		setTotalPages(countPages);
+		try {
+			console.log('dispatch........');
+			dispatch(getAllRequest(oficioId));
+			console.log('useEffect ....====');
+			const countPages = Math.ceil(filtered.length / recordsPerPage);
+			setTotalPages(countPages);
+		} catch (error) {
+			console.log('error ', error.toString());
+		}
 	}, [dispatch, filtered.length, oficioId, recordsPerPage]);
 
 	const handlePageChange = useCallback(

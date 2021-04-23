@@ -13,7 +13,13 @@ export const format = (errorMessage: string): ReturnedErrorMessage => {
 	} else if (errorMessage.includes('code 404')) {
 		code = 404;
 		message = 'Serviço temporáriamente fora do ar ! Por favor, tente em alguns instantes';
-	} else {
+	} 
+	message = 'Usuário ou senha inválidos !';
+} else if (errorMessage.includes('code 404')) {
+	code = 404;
+	message = 'Serviço temporáriamente fora do ar ! Por favor, tente em alguns instantes';
+}
+	else {
 		code = 406;
 		message = 'Ocorreu um erro inesperado ! Por favor tente dentro de alguns minutos';
 	}
