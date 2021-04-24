@@ -18,7 +18,7 @@ import * as S from './styles';
 import Button from '../../components/button';
 import Input from '../../components/input';
 
-import rtdNotificaImg from '../../assets/rtdnotifica.png';
+import rtdNotificaImg from '../../assets/rtd-notifica.png';
 import { ResponseError } from '../../types/response';
 
 const SignInSchema = yup.object().shape({
@@ -58,41 +58,43 @@ const SignIn = () => {
 
 	return (
 		<S.Container>
-			<img src={rtdNotificaImg} alt='Logo da aplicação RtdNotifica App' />
+			<div>
+				<img src={rtdNotificaImg} alt='Logo da aplicação RtdNotifica App' />
 
-			<form onSubmit={handleSubmit(submitForm)}>
-				<ErrorMessage
-					name='email'
-					errors={errors}
-					render={({ message }) => <p id='test-email-error'>{message}</p>}
-				/>
-				<Input
-					id='email'
-					name='email'
-					type='text'
-					placeholder='E-mail do usuário'
-					inputRef={register}
-					error={errors.email?.message}
-					icon={AiOutlineUser}
-				/>
+				<form onSubmit={handleSubmit(submitForm)}>
+					<ErrorMessage
+						name='email'
+						errors={errors}
+						render={({ message }) => <p id='test-email-error'>{message}</p>}
+					/>
+					<Input
+						id='email'
+						name='email'
+						type='text'
+						placeholder='E-mail do usuário'
+						inputRef={register}
+						error={errors.email?.message}
+						icon={AiOutlineUser}
+					/>
 
-				<ErrorMessage
-					name='password'
-					errors={errors}
-					render={({ message }) => <p id='test-password-error'>{message}</p>}
-				/>
-				<Input
-					id='password'
-					name='password'
-					type='password'
-					placeholder='Senha do usuário'
-					inputRef={register}
-					error={errors.password?.message}
-					icon={AiOutlineLock}
-				/>
+					<ErrorMessage
+						name='password'
+						errors={errors}
+						render={({ message }) => <p id='test-password-error'>{message}</p>}
+					/>
+					<Input
+						id='password'
+						name='password'
+						type='password'
+						placeholder='Senha do usuário'
+						inputRef={register}
+						error={errors.password?.message}
+						icon={AiOutlineLock}
+					/>
 
-				<Button type='submit'>Entrar</Button>
-			</form>
+					<Button type='submit'>Entrar</Button>
+				</form>
+			</div>
 		</S.Container>
 	);
 };
