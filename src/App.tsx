@@ -4,6 +4,7 @@ import { store, persistor } from './store/configureStore';
 import GlobalStyle from './styles/global';
 import Routes from '../src/routes/index';
 import Toast from './components/redux-toastr';
+import { ModalProvider } from 'styled-react-modal';
 
 function App() {
 	return (
@@ -11,7 +12,9 @@ function App() {
 			<GlobalStyle />
 			<PersistGate persistor={persistor}>
 				<Toast />
-				<Routes />
+				<ModalProvider>
+					<Routes />
+				</ModalProvider>
 			</PersistGate>
 		</Provider>
 	);

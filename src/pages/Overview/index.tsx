@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../../store/configureStore';
-import { Container } from './styles';
+import * as S from './styles';
 import Modal from 'react-modal';
 import { getAllRequest } from '../../store/notificacao/actions';
 import { Notificacao } from '../../store/notificacao/types';
@@ -22,7 +22,6 @@ const Overview = () => {
 	const filtered = useSelector<State, Notificacao[]>(
 		state => state.notificacoes.filteredNotificacoes
 	);
-	Modal.setAppElement('#root');
 
 	//const { code, message } = useSelector<State, ResponseError>(state => state.notificacoes.error);
 	const code = 401;
@@ -96,22 +95,17 @@ const Overview = () => {
 
 	if (code === ResponseCode.UNAUTHORIZED) {
 		return (
-			<Modal
-				isOpen={true}
-				onRequestClose={handleCloseModal}
-				overlayClassName='react-modal-overlay'
-				className='react-modal-content'
-			>
-				<button type='button' onClick={handleCloseModal} className='react-modal-close'>
-					<img src={closeImg} alt='Button to close the modal' />
-				</button>
+			<S.StyledModal isOpen={true}>
+				<div>
+					<strong>aqui</strong>
+				</div>
 				<button onClick={handleCloseModal}>Close Modal</button>
-			</Modal>
+			</S.StyledModal>
 		);
 	}
 
 	return (
-		<Container>
+		<S.Container>
 			<h1>Overview page</h1>
 			<table>
 				<thead>
@@ -138,7 +132,7 @@ const Overview = () => {
 				onNextClick={handleNextClick}
 				currentPage={currentPage}
 			/>
-		</Container>
+		</S.Container>
 	);
 };
 
