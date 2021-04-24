@@ -7,8 +7,9 @@ import { getAllRequest } from '../../store/notificacao/actions';
 import { Notificacao } from '../../store/notificacao/types';
 import Pagination from '../../components/pagination';
 import { ResponseError, ResponseCode } from '../../types/response';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { resetUserState } from '../../store/auth/actions';
+import closeImg from '../../assets/close.svg';
 
 const Overview = () => {
 	//
@@ -26,7 +27,6 @@ const Overview = () => {
 	//const { code, message } = useSelector<State, ResponseError>(state => state.notificacoes.error);
 	const code = 401;
 	const dispatch = useDispatch();
-	const history = useHistory();
 
 	const loadRecordsToPage = useCallback(
 		(currentPage: number) => {
@@ -69,8 +69,8 @@ const Overview = () => {
 
 	const handleCloseModal = useCallback(() => {
 		dispatch(resetUserState());
-		history.push('/');
-	}, [dispatch, history]);
+		return <Redirect to='/' />;
+	}, [dispatch]);
 
 	const handlePreviousClick = useCallback(
 		(currentPage: number) => {
@@ -93,19 +93,18 @@ const Overview = () => {
 		},
 		[filtered.length, loadRecordsToPage]
 	);
-	const customStyles = {
-		content: {
-			top: '50%',
-			left: '50%',
-			right: 'auto',
-			bottom: 'auto',
-			marginRight: '-50%',
-			transform: 'translate(-50%, -50%)',
-		},
-	};
+
 	if (code === ResponseCode.UNAUTHORIZED) {
 		return (
-			<Modal isOpen={true} onRequestClose={handleCloseModal} style={customStyles}>
+			<Modal
+				isOpen={true}
+				onRequestClose={handleCloseModal}
+				overlayClassName='react-modal-overlay'
+				className='react-modal-content'
+			>
+				<button type='button' onClick={handleCloseModal} className='react-modal-close'>
+					<img src={closeImg} alt='Button to close the modal' />
+				</button>
 				<button onClick={handleCloseModal}>Close Modal</button>
 			</Modal>
 		);
