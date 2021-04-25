@@ -2,14 +2,13 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../../store/configureStore';
 import * as S from './styles';
-import Modal from 'react-modal';
+
 import { getAllRequest } from '../../store/notificacao/actions';
 import { Notificacao } from '../../store/notificacao/types';
 import Pagination from '../../components/pagination';
 import { ResponseError, ResponseCode } from '../../types/response';
 import { Redirect } from 'react-router-dom';
 import { resetUserState } from '../../store/auth/actions';
-import closeImg from '../../assets/close.svg';
 
 const Overview = () => {
 	//
@@ -99,7 +98,7 @@ const Overview = () => {
 				<div>
 					<strong>aqui</strong>
 				</div>
-				<button onClick={handleCloseModal}>Close Modal</button>
+				<button onClick={handleCloseModal}>Fechar</button>
 			</S.StyledModal>
 		);
 	}
@@ -137,3 +136,7 @@ const Overview = () => {
 };
 
 export default Overview;
+
+export const lavai = (num: number) => {
+	return num * 2;
+};
