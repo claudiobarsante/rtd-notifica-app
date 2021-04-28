@@ -15,12 +15,14 @@ import authReducer from './reducer';
 type signInRequestType = ReturnType<typeof signInRequest>;
 
 /*Testando com o redux-saga-testing */
-
+/** O LOGIN COM  email: 'user@demo.com.br', password: 'Demo@2020' é
+ * o usuário padrão para testes
+ */
 describe('Testing signIn', () => {
 	const sigInService = jest.fn();
 	const mockAction = {
 		type: UserActionTypes.SIGNIN_REQUEST,
-		payload: { email: 'User@demo.com.br', password: 'Demo@2020' },
+		payload: { email: 'user@demo.com.br', password: 'Demo@2020' },
 	};
 	const it = sagaHelper(signIn(mockAction));
 
