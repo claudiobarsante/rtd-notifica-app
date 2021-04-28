@@ -19,7 +19,6 @@ import Button from '../../components/button';
 import Input from '../../components/input';
 
 import rtdNotificaImg from '../../assets/rtd-notifica.png';
-import { ResponseError } from '../../types/response';
 
 const SignInSchema = yup.object().shape({
 	email: yup
@@ -35,20 +34,11 @@ const SignIn = () => {
 		mode: 'onBlur',
 	});
 
-	//const { isLoading, activityText } = useSelector<State, LoadingIndicator>(
-	//	state => state.auth.loadingIndicator
-	//);
-	// const { code, message } = useSelector<State, ResponseError>(state => state.auth.error);
-	// const hasError = code > 0;
-	// console.log('sign ', code);
-
 	const isAuthenticated = useSelector<State, boolean>(state => state.auth.isAuthenticated);
 
 	const dispatch = useDispatch();
-	//const { addToast } = useToasts();
 
 	const submitForm = async ({ email, password }: Credentials) => {
-		//dispatch(signInRequest({ email: 'User@demo.com.br', password: 'Demo@2020' }));
 		dispatch(signInRequest({ email, password }));
 	};
 
