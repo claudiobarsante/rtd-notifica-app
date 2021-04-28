@@ -22,8 +22,8 @@ const Overview = () => {
 		state => state.notificacoes.filteredNotificacoes
 	);
 
-	//const { code, message } = useSelector<State, ResponseError>(state => state.notificacoes.error);
-	const code = 401;
+	const { code, message } = useSelector<State, ResponseError>(state => state.notificacoes.error);
+	//const code = 401;
 	const dispatch = useDispatch();
 
 	const loadRecordsToPage = useCallback(
@@ -136,7 +136,3 @@ const Overview = () => {
 };
 
 export default Overview;
-
-export const lavai = (num: number) => {
-	return num * 2;
-};
