@@ -1,6 +1,6 @@
 import sagaHelper from 'redux-saga-testing';
-import { call, put } from 'redux-saga/effects';
-import authSaga, { signIn } from './sagas';
+import { call } from 'redux-saga/effects';
+import { signIn } from './sagas';
 
 import { signInRequest, setLoadingIndicator, signInFailure, signInSuccess } from './actions';
 import { UserActionTypes } from './actions';
@@ -11,10 +11,6 @@ import { Credentials } from './types';
 import sigInService from '../../services/authService';
 
 import authReducer from './reducer';
-const mockAction = {
-	type: UserActionTypes.SIGNIN_REQUEST,
-	payload: { email: '123@gmail.com', password: '123' },
-};
 
 type signInRequestType = ReturnType<typeof signInRequest>;
 
@@ -24,9 +20,9 @@ describe('Testing signIn', () => {
 	const sigInService = jest.fn();
 	const mockAction = {
 		type: UserActionTypes.SIGNIN_REQUEST,
-		payload: { 'User@demo.com.br', password: 'Demo@2020' },
+		payload: { email: 'User@demo.com.br', password: 'Demo@2020' },
 	};
-	const it = sagaHelper(signIn(action: signInRequestType));
+	const it = sagaHelper(signIn(mockAction));
 
 	it('should put setLoadingIndicator', result => {
 		console.log('result ', result);
@@ -35,7 +31,7 @@ describe('Testing signIn', () => {
 		);
 		console.log('result => ', result);
 	});
-	it('should have called the mock signInService first', result => {
+	it('should have called the mock signInService', result => {
 		expect(result).toEqual(call(sigInService, { email: 'fake@email.com', password: '171' }));
 	});
 });
