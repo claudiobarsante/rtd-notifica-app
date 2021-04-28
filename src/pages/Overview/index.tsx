@@ -96,7 +96,7 @@ const Overview = () => {
 		return (
 			<S.StyledModal isOpen={true}>
 				<div>
-					<strong>aqui</strong>
+					<strong>colocar texto aqui</strong>
 				</div>
 				<button onClick={handleCloseModal}>Fechar</button>
 			</S.StyledModal>
