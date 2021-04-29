@@ -4,18 +4,21 @@ import Modal from 'styled-react-modal';
 export const Container = styled.div``;
 
 export const StyledModal = Modal.styled`
-	width: 60rem;
-	height: 60rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-    background-color: var(--background-modal);
+display: flex;
+justify-content: center;
+align-items: center;
+background-color:white;
+//background-color: var(--background-modal);
+height: 50rem;
+width: 50rem;
 
 	div {
-		width: 20rem;
-		height: 20rem;
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		padding: 2rem;
 	}
 `;
 // export const  ReactModalStyled = styled(Modal)`

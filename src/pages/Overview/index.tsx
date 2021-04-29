@@ -9,6 +9,7 @@ import Pagination from '../../components/pagination';
 import { ResponseError, ResponseCode } from '../../types/response';
 import { Redirect } from 'react-router-dom';
 import { resetUserState } from '../../store/auth/actions';
+import sessionExpiredImg from '../../assets/session-expired.jpg';
 
 const Overview = () => {
 	//
@@ -23,7 +24,7 @@ const Overview = () => {
 	);
 
 	const { code, message } = useSelector<State, ResponseError>(state => state.notificacoes.error);
-	//const code = 401;
+
 	const dispatch = useDispatch();
 
 	const loadRecordsToPage = useCallback(
@@ -96,9 +97,14 @@ const Overview = () => {
 		return (
 			<S.StyledModal isOpen={true}>
 				<div>
-					<strong>colocar texto aqui</strong>
+					<h2>Sessão expirada</h2>
+					<h4>{message}</h4>
+					<img
+						src={sessionExpiredImg}
+						alt='Imagem em azul com um ícnoe indicando para recarregar a página'
+					/>
+					<button onClick={handleCloseModal}>Fazer login novamente</button>
 				</div>
-				<button onClick={handleCloseModal}>Fechar</button>
 			</S.StyledModal>
 		);
 	}
