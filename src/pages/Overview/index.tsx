@@ -111,7 +111,8 @@ const Overview = () => {
 
 	return (
 		<S.Container>
-			<h1>Overview page</h1>
+			<h1>Notificações</h1>
+
 			<table>
 				<thead>
 					<tr>
