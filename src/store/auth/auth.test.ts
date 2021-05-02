@@ -19,6 +19,22 @@ type signInRequestType = ReturnType<typeof signInRequest>;
 //? O LOGIN COM  email: 'user@demo.com.br', password: 'Demo@2020' é
 //? o usuário padrão para testes
 
+jest.mock('sigInService');
+
+describe('Testing sigInService', () => {
+	it('get user', async () => {
+		const dispatched = [];
+		runSaga(
+			{
+				dispatch: action => dispatched.push(action),
+			},
+			signIn({
+				type: UserActionTypes,
+				payload: { email: 'user@demo.com.br', password: 'Demo@2020' },
+			})
+		);
+	});
+});
 describe('Testing Saga', () => {
 	it('should call signInService and dispatch action', async () => {
 		const user: Credentials = { email: 'user@demo.com.br', password: 'Demo@2020' };
